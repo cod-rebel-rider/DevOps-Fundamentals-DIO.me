@@ -35,5 +35,23 @@ steps:
     az sql db create --resource-group rg-devops-fundamentals-01 --server DevOpsSqlServer --name MyDB --edition GeneralPurpose --family Gen4 --capacity 2 --collation SQL_Latin1_General_CP1_CI_AS
   displayName: 'Create SQL Database'
 
+  - script: |
+    az storage account create --name st-devops-fundamentals --resource-group rg-devops-fundamentals-01 --location brazilsouth --sku Standard_LRS
+  displayName: 'Create Storage Account'
+
+- script: |
+    az storage container create --name devops --account-name st-devops-fundamentals
+  displayName: 'Create Storage Container'
+
+- script: |
+    git clone https://github.com/seu-usuario/seu-repositorio.git
+    az storage blob upload-batch --destination devops --type block --account-name st-devops-fundamentals --source ./DevOps-Fundamentals-DIO.me
+/website
+  displayName: 'Upload Folder to Static Website'
+
+- script: |
+    az storage blob service-properties update --account-name st-devops-fundamentals --static-website --404-document index.html --index-document index.html
+  displayName: 'Configure Static Website'
+
 - script: az logout
   displayName: 'Azure Logout'
