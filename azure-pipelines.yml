@@ -13,7 +13,7 @@ steps:
   displayName: 'Create Resource Group'
 
 - script: |
-    for i in {1..50}
+    for i in {1..10}
     do
       vm_name="DevOps-VM$i"
       az vm create --resource-group rg-devops-fundamentals-01 --name $vm_name --image UbuntuLTS --admin-username devops-user --admin-password $(AZURE_VM_PASSWORD) --size Standard_DS2_v2
@@ -45,10 +45,9 @@ steps:
 
 - script: |
     git clone https://github.com/seu-usuario/seu-repositorio.git
-    az storage blob upload-batch --destination devops --type block --account-name st-devops-fundamentals --source ./DevOps-Fundamentals-DIO.me
-/website
+    az storage blob upload-batch --destination devops --type block --account-name st-devops-fundamentals --source ./DevOps-Fundamentals-DIO.me/website
   displayName: 'Upload Folder to Static Website'
-  
+
 - script: |
     az storage blob service-properties update --account-name st-devops-fundamentals --static-website --404-document index.html --index-document index.html
   displayName: 'Configure Static Website'
