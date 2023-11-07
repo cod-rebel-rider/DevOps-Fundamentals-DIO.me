@@ -48,7 +48,7 @@ steps:
     az storage blob upload-batch --destination devops --type block --account-name st-devops-fundamentals --source ./DevOps-Fundamentals-DIO.me
 /website
   displayName: 'Upload Folder to Static Website'
-
+  
 - script: |
     az storage blob service-properties update --account-name st-devops-fundamentals --static-website --404-document index.html --index-document index.html
   displayName: 'Configure Static Website'
