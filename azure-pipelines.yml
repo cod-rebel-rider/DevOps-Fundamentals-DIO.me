@@ -35,7 +35,7 @@ steps:
     az sql db create --resource-group rg-devops-fundamentals-01 --server DevOpsSqlServer --name MyDB --edition GeneralPurpose --family Gen4 --capacity 2 --collation SQL_Latin1_General_CP1_CI_AS
   displayName: 'Create SQL Database'
 
-  - script: |
+- script: |
     az storage account create --name st-devops-fundamentals --resource-group rg-devops-fundamentals-01 --location brazilsouth --sku Standard_LRS
   displayName: 'Create Storage Account'
 
